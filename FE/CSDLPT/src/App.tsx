@@ -1,15 +1,11 @@
-import { useState } from "react";
 import "./App.css";
-
+import { Route, Routes } from "react-router-dom";
+import Home from "./page/home-page/Home";
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <p className="text-[red]">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <Routes>
+      <Route path="/" element={<Home />} />
+    </Routes>
   );
 }
 
