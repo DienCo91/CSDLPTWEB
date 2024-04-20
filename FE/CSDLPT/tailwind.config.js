@@ -3,6 +3,9 @@ export default {
   content: ["./src/**/*.{html,js,ts,tsx}"],
   theme: {
     extend: {},
+    colors: {
+      mainRed: "#ad171c",
+    },
   },
   plugins: [],
 };
