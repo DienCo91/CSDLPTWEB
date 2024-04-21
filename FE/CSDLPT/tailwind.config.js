@@ -5,6 +5,7 @@ export default {
     extend: {},
     colors: {
       mainRed: "#ad171c",
+      redLight: "#e8bebf",
     },
   },
   plugins: [],

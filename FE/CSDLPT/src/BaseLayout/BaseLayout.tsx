@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import Nav from "../components/Nav/Nav";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import SideBar from "../components/SideBar/SideBar";
+import Footer from "../components/Footer/Footer";
 
 const BaseLayout = () => {
   const { pathname } = useLocation();
@@ -22,6 +23,7 @@ const BaseLayout = () => {
           <SideBar />
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

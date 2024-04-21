@@ -44,6 +44,18 @@ const POST = [
     time: "03/08/2023 14:11",
   },
 ];
+const TUTORIAL = [
+  {
+    title:
+      "Hướng dẫn sử dụng cổng thông tin điện tử quản lý đào tạo cho giảng viên và cố vấn học tập",
+    time: "01/08/2023 10:59 ",
+  },
+  {
+    title:
+      "Hướng dẫn sử dụng cổng thông tin điện tử quản lý đào tạo cho sinh viên",
+    time: "01/07/2023 00:00  ",
+  },
+];
 const Home = () => {
   return (
     <div>
@@ -70,9 +82,12 @@ const Home = () => {
             />
           </div>
 
-          <div className="flex-[8] ml-[10px] border-l-[1px] my-[8px] border-[#ccccccd1] ">
+          <div className="flex-[8] ml-[4px] border-l-[1px] my-[8px] border-[#ccccccd1] ">
             {POST.map((item) => (
-              <div className="flex  items-start pb-[4px]  border-[#ccccccd1] border-b-[1px]">
+              <div
+                key={item.title.toString()}
+                className="flex  items-start pb-[4px]  border-[#ccccccd1] border-b-[1px]"
+              >
                 <div className="flex-[10] text-justify px-[10px]">
                   <i className="fa-solid fa-angles-right text-mainRed mr-[6px] text-[14px]"></i>
                   <span className="text-[0.9em]">{item.title}</span>
@@ -89,6 +104,24 @@ const Home = () => {
               </div>
             ))}
           </div>
+        </div>
+      </div>
+      <div className="mt-[10px] rounded-md overflow-hidden shadow-md pb-[6px]">
+        <div className="text-white bg-mainRed text-[0.8rem] px-[20px] py-[6px] ">
+          HƯỚNG DẪN
+        </div>
+        <div>
+          {TUTORIAL.map((item) => (
+            <div className="flex items-center">
+              <div className="flex-[8] flex items-center px-[10px]">
+                <i className="fa-solid fa-angles-right text-mainRed mr-[8px] text-[14px]"></i>
+                <div>{item.title}</div>
+              </div>
+              <p className="text-end flex-[2] text-[0.8em] italic opacity-80 px-[10px]">
+                {item.time}
+              </p>
+            </div>
+          ))}
         </div>
       </div>
     </div>

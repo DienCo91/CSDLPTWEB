@@ -58,7 +58,7 @@ const Nav = () => {
           <div className="subLogo"></div>
         </div>
 
-        <div className="bg-[#e8bebf] h-[34px]"></div>
+        <div className="bg-redLight h-[34px]"></div>
         <div className=" h-[34px]"></div>
       </div>
     </div>
