@@ -13,9 +13,9 @@ const BaseLayout = () => {
     }
   }, [pathname]);
   return (
-    <div>
+    <div className="flex flex-col justify-between lg:h-screen">
       <Nav />
-      <div className="flex">
+      <div className="flex flex-[8]">
         <div className="flex-[15]">
           <Outlet />
         </div>
