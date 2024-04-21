@@ -1,4 +1,3 @@
-import React from "react";
 import HomeImg from "../../assets/img/HomeImage.png";
 const POST = [
   {

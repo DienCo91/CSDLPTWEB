@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import { useEffect, useRef } from "react";
 import subLogo from "../../assets/img/subLogo.png";
 import "./Nav.css";
 import { useLocation } from "react-router-dom";
