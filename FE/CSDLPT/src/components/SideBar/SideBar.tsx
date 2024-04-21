@@ -1,12 +1,6 @@
-import {
-  Autocomplete,
-  Button,
-  createTheme,
-  TextField,
-  ThemeProvider,
-} from "@mui/material";
+import { Button, createTheme, TextField, ThemeProvider } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
-import DeleteIcon from "@mui/icons-material/Delete";
+
 declare module "@mui/material/styles" {
   interface Palette {
     ochre: Palette["primary"];
