@@ -1,7 +1,7 @@
 import { useEffect, useRef } from "react";
 import subLogo from "../../assets/img/subLogo.png";
 import "./Nav.css";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const ITEM_HEADER = [
   {
@@ -19,6 +19,7 @@ const ITEM_HEADER = [
 const Nav = () => {
   const local = useLocation();
   const subLogoRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   useEffect(() => {
     const timer = setTimeout(() => {
       subLogoRef.current?.classList.add(..."left-[0]".split(" "));
@@ -35,10 +36,11 @@ const Nav = () => {
       <div className="bg-mainRed text-white px-[60px] py-[14px] relative shadow-[0px_10px_20px_1px_rgba(0,0,0,0.3)] flex z-[2] ">
         {ITEM_HEADER.map((item) => (
           <div
-            className={`flex mr-[20px] ${
+            className={`flex mr-[20px] cursor-pointer ${
               local.pathname === item.type ? "opacity-1" : "opacity-50"
             }`}
             key={item.name.toString()}
+            onClick={() => navigate(item.type)}
           >
             <i className={`${item.icon} mr-[10px]`}></i>
             <h1 className="text-[14px]">{item.name}</h1>

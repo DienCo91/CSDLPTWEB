@@ -58,7 +58,7 @@ const TUTORIAL = [
 const Home = () => {
   return (
     <div>
-      <div className=" rounded-md overflow-hidden shadow-lg">
+      <div className=" rounded-md overflow-hidden relative shadow-lg">
         <div className="text-white bg-mainRed text-[0.8rem] px-[20px] py-[6px]">
           THÔNG BÁO{" "}
         </div>
