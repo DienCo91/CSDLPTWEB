@@ -1,5 +1,3 @@
-import React from "react";
-
 const ALL_DAY = [
   "Thứ 2",
   "Thứ 3",
