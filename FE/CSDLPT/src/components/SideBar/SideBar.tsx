@@ -1,7 +1,6 @@
 import { Button, createTheme, TextField, ThemeProvider } from "@mui/material";
 import LoginIcon from "@mui/icons-material/Login";
 import { useRef, useState } from "react";
-import { motion } from "framer-motion";
 import "./SideBar.css";
 import { ROUTES } from "../../until/CONSTANS";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -161,7 +160,7 @@ const SideBar = () => {
               >
                 <i
                   className={`fa-solid  fa-chevron-right mr-[10px] transition-all duration-200 ${
-                   '/'+item.route === pathname && "rotate-90"
+                    "/" + item.route === pathname && "rotate-90"
                   }`}
                 ></i>
                 {item.name}

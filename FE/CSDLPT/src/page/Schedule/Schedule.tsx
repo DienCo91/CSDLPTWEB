@@ -1,5 +1,5 @@
 import { Autocomplete, TextField } from "@mui/material";
-import React from "react";
+
 import ScheduleTable from "./ScheduleTable";
 
 const KI_HOC = [
@@ -50,7 +50,7 @@ const Schedule = () => {
           defaultValue={KI_HOC[0]}
           size="small"
           className="mt-[12px] mx-[6px] "
-          onChange={(e, value) => console.log(value)}
+          onChange={(_e, value) => console.log(value)}
           renderInput={(params) => <TextField {...params} label="Kì Học" />}
         />
         <Autocomplete
@@ -66,7 +66,7 @@ const Schedule = () => {
           }}
           size="small"
           className="mt-[12px] mx-[6px] "
-          onChange={(e, value) => console.log(value)}
+          onChange={(_e, value) => console.log(value)}
           renderInput={(params) => (
             <TextField {...params} label="Thời khóa biểu" />
           )}
@@ -85,7 +85,7 @@ const Schedule = () => {
         }}
         size="small"
         className=" mx-[6px] mt-[10px] "
-        onChange={(e, value) => console.log(value)}
+        onChange={(_e, value) => console.log(value)}
         renderInput={(params) => <TextField {...params} label="Tuần" />}
       />
       <ScheduleTable />
