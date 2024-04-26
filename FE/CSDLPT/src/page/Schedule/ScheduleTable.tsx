@@ -27,7 +27,7 @@ const TIET = [
 
 const ScheduleTable = () => {
   return (
-    <div className="mt-[10px]">
+    <div className="mt-[10px] px-[4px]">
       <table className="w-full">
         <tr>
           <th className="font-normal w-[80px] text-center border-[1px] border-[#CCCC]">

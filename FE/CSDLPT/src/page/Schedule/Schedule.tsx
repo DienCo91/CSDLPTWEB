@@ -2,7 +2,7 @@ import { Autocomplete, TextField } from "@mui/material";
 
 import ScheduleTable from "./ScheduleTable";
 
-const KI_HOC = [
+export const KI_HOC = [
   { label: "Học kì 2 Năm học 2023 - 2024 " },
   { label: "Học kì 1 Năm học 2023 - 2024" },
   { label: "Học kì 3 Năm học 2022 - 2023" },
@@ -27,7 +27,7 @@ const WEEK = [
 
 const Schedule = () => {
   return (
-    <div className="overflow-hidden rounded-md ">
+    <div className="overflow-hidden rounded-md shadow-lg pb-[10px] ">
       <div className="bg-mainRed text-[white] font-normal flex justify-between px-[10px] py-[2px]  items-center">
         <div>
           <i className="fa-solid fa-atom mr-[10px]"></i>
