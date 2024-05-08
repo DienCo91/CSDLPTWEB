@@ -49,9 +49,11 @@ const CourseRegistration = () => {
           Môn học đã đăng ký :
         </h1>
         <ListCourseRegisted data={LIST_COURSE_REGISTERED} />
-        <h1 className="bg-[#7a7a7a1c]  text-center py-[6px] italic">
-          Không tìm thấy dữ liệu
-        </h1>
+        {!LIST_COURSE_REGISTERED && (
+          <h1 className="bg-[#7a7a7a1c]  text-center py-[6px] italic">
+            Không tìm thấy dữ liệu
+          </h1>
+        )}
       </div>
     </div>
   );
