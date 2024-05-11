@@ -60,7 +60,7 @@ const Home = () => {
     <div>
       <div className=" rounded-md overflow-hidden relative shadow-lg">
         <div className="text-white bg-mainRed text-[0.8rem] px-[20px] py-[6px]">
-          THÔNG BÁO{" "}
+          THÔNG BÁO
         </div>
         <div className="flex pr-[14px]">
           <div className="flex-[4] px-[8px]">
@@ -110,8 +110,8 @@ const Home = () => {
           HƯỚNG DẪN
         </div>
         <div>
-          {TUTORIAL.map((item) => (
-            <div className="flex items-center">
+          {TUTORIAL.map((item,idx) => (
+            <div key={idx} className="flex items-center">
               <div className="flex-[8] flex items-center px-[10px]">
                 <i className="fa-solid fa-angles-right text-mainRed mr-[8px] text-[14px]"></i>
                 <div>{item.title}</div>

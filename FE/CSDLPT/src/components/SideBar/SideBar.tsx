@@ -4,6 +4,13 @@ import { useRef, useState } from "react";
 import "./SideBar.css";
 import { ROUTES } from "../../until/CONSTANS";
 import { useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { env } from "../../services/config";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { setIsLogin, setLoading } from "../../features/loading/loadingSlice";
+import { setUser } from "../../features/user/userSlice";
+import { toast } from "react-toastify";
 declare module "@mui/material/styles" {
   interface Palette {
     ochre: Palette["primary"];
@@ -45,12 +52,19 @@ const FEATURES = [
 ];
 
 const SideBar = () => {
-  const [isLogin, setIsLogin] = useState<Boolean>(false);
+  
   const iconRightLeft = useRef<HTMLDivElement>(null);
   const [isShowMoreIcon, setIsShowMoreIcon] = useState<boolean>(false);
   const showMoreText = useRef<HTMLDivElement>(null);
+  const isLogin = useSelector((state:RootState)=>state.loading.isLogin)
+  const user = useSelector((state:RootState)=>state.user.user)
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const dispatch = useDispatch()
+  const [username,setUsername] = useState<string>("")
+  const [password,setPassword] = useState<string>("")
+
+
   const handleShowMore = () => {
     !isShowMoreIcon
       ? iconRightLeft.current?.classList.add("rotate-90")
@@ -63,6 +77,29 @@ const SideBar = () => {
 
     setIsShowMoreIcon(!isShowMoreIcon);
   };
+
+  const handleLogin= async()=>{
+    if(isLogin) {
+      dispatch(setUser(null))
+      dispatch(setIsLogin(false))
+    }
+    dispatch(setLoading(true))
+    try{
+      const res = await axios.post(`${env.VITE_API_ENDPOINT}/login`,{username,password})
+      if(res.data.responseCode===200){
+        dispatch(setUser(res.data.object))
+        dispatch(setIsLogin(true))
+        navigate(ROUTES.USER_INFOR)
+
+      }
+    }
+    catch(e){
+        toast.error("Not found account, try again")
+    }
+    finally{
+      dispatch(setLoading(false))
+    }
+  }
 
   return (
     <>
@@ -80,7 +117,7 @@ const SideBar = () => {
           )}
         </div>
         <div className="px-[10px] mt-[10px]">
-          {!isLogin ? (
+          {!isLogin && !user ? (
             <>
               <ThemeProvider theme={theme}>
                 <TextField
@@ -89,6 +126,8 @@ const SideBar = () => {
                   label="Tên đăng nhập"
                   variant="standard"
                   color="ochre"
+                  value={username}
+                  onChange={(e)=>setUsername(e.target.value)}
                 />
                 <TextField
                   fullWidth
@@ -98,11 +137,15 @@ const SideBar = () => {
                   color="ochre"
                   margin="normal"
                   type="password"
+                  onChange={(e)=>setPassword(e.target.value)}
+                  onKeyDown={(e)=>{if(e.keyCode===13){
+                    handleLogin()
+                  }}}
                 />
               </ThemeProvider>
-              <p className="text-end italic text-mainRed text-[0.8em] mb-[6px] cursor-pointer">
+              {/* <p className="text-end italic text-mainRed text-[0.8em] mb-[6px] cursor-pointer">
                 Quên mật khẩu
-              </p>
+              </p> */}
             </>
           ) : (
             <div
@@ -111,15 +154,15 @@ const SideBar = () => {
             >
               <div className="text-mainRed text-[0.9em] flex py-[6px] border-b-[1px] border-solid border-[#CCCC]">
                 <div className="w-[40%]">Tài khoản</div>
-                <div className=""> B21DCCN555</div>
+                <div className=""> {user?.tai_khoan_id}</div>
               </div>
               <div className="text-mainRed text-[0.9em] flex py-[6px] border-b-[1px] border-solid border-[#CCCC]">
                 <div className="w-[40%]">Họ và tên</div>
-                <div className=""> Dương Minh Tuyền</div>
+                <div className=""> {user?.full_name}</div>
               </div>
               <div className="text-mainRed text-[0.9em] flex py-[6px] border-b-[1px] border-solid border-[#CCCC]">
                 <div className="w-[40%]">Ngày sinh</div>
-                <div className=""> 11/12/2018</div>
+                <div className=""> {user?.birth}</div>
               </div>
               <div className="text-mainRed text-[0.9em] flex py-[6px] border-b-[1px] border-solid border-[#CCCC]">
                 <div className="w-[40%]">Ngành</div>
@@ -129,10 +172,10 @@ const SideBar = () => {
                 <div className="w-[40%]">Khoa</div>
                 <div className=""> Công Nghệ Thông Tin</div>
               </div>
-              <div className="text-mainRed text-[0.9em] flex py-[6px] border-b-[1px] border-solid border-[#CCCC]">
+              {/* <div className="text-mainRed text-[0.9em] flex py-[6px] border-b-[1px] border-solid border-[#CCCC]">
                 <div className="w-[40%]">Lớp</div>
                 <div className=""> B21CQCN23</div>
-              </div>
+              </div> */}
             </div>
           )}
 
@@ -141,7 +184,7 @@ const SideBar = () => {
             variant="contained"
             style={{ backgroundColor: "#ad171c" }}
             startIcon={<LoginIcon />}
-            onClick={() => setIsLogin(!isLogin)}
+            onClick={handleLogin}
           >
             {isLogin ? "Đăng Xuất" : "Đăng Nhập"}
           </Button>
@@ -155,6 +198,7 @@ const SideBar = () => {
           <div className="pl-[6px] text-mainRed pb-[6px] px-[10px] text-[0.9em]">
             {FEATURES.map((item) => (
               <div
+                key={item.name}
                 onClick={() => navigate("/" + item.route)}
                 className="pt-[6px] border-b-[1px] border-[#7f7f7f7d] cursor-pointer hover:text-[#5a2525]"
               >

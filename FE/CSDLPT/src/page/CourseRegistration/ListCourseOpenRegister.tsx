@@ -1,29 +1,42 @@
-const ListCourseOpenRegister = () => {
+import { Checkbox } from "@mui/material";
+import { ICourse } from "./CourseRegistration";
+
+interface IListCourseOpenRegister {
+  courses:ICourse[]
+  onChecked:(item:string) =>void
+  listCourseChecked:string[]
+}
+
+const ListCourseOpenRegister:React.FC<IListCourseOpenRegister> = ({courses,onChecked,listCourseChecked}) => {
+  const handleClick = (item:ICourse)=>{
+    onChecked(item.mon_hoc_id)
+  }
+
   return (
-    <div>
-      <table className="w-full rounded-t-md overflow-hidden">
-        <tr className="flex bg-mainRed text-white text-center justify-between border-[#CCCC]">
-          <th className=" border-[1px] flex-[1]">
+    <div className="flex justify-center bg-[#7a7a7a1c] ">
+      <table className="w-[96%] rounded-t-md overflow-hidden bg-[white] ">
+        <tr className="flex bg-mainRed text-white text-center justify-between border-[#CCCC] pr-[12px]">
+          <th className=" border-[1px] flex-[1] pl-[18px]">
             Mã MH <i className="fa-solid fa-caret-up ml-[4px]"></i>
           </th>
-          <th className=" border-[1px] flex-[5] ">Tên môn học </th>
-          <th className=" border-[1px]  flex-[1]">Nhóm Tổ</th>
+          <th className=" border-[1px] flex-[5] pl-[18px]">Tên môn học </th>
+          
           <th className=" border-[1px]  flex-[1]">Số TC</th>
-          <th className=" border-[1px]  flex-[1]">Lớp</th>
+          <th className=" border-[1px]  flex-[1]"></th>
+          {/* <th className=" border-[1px]  flex-[1]">Lớp</th>
           <th className=" border-[1px]  flex-[2]">Số Lượng</th>
           <th className=" border-[1px]  flex-[1]">Còn Lại</th>
-          <th className=" border-[1px] flex-[2]">Thời khóa biểu</th>
+          <th className=" border-[1px] flex-[2]">Thời khóa biểu</th> */}
         </tr>
-        <tr className="flex  text-black text-center justify-between border-[#cccc]">
-          <th className=" border-[1px] flex-[1]">...</th>
-          <th className=" border-[1px] flex-[5] ">...</th>
-          <th className=" border-[1px]  flex-[1]">...</th>
-          <th className=" border-[1px]  flex-[1]">...</th>
-          <th className=" border-[1px]  flex-[1]">...</th>
-          <th className=" border-[1px]  flex-[2]">...</th>
-          <th className=" border-[1px]  flex-[1]">...</th>
-          <th className=" border-[1px] flex-[2]">...</th>
-        </tr>
+        <div className="h-[400px] overflow-y-auto">
+        {courses&&courses.length&&courses.map((course)=><tr onClick={()=>handleClick(course)} key={course.bo_mon_id} className="flex  text-black text-center justify-between border-[#cccc]">
+          <th className=" border-[1px] flex-[1] font-normal pl-[18px] text-start">{course.mon_hoc_id}</th>
+          <th className=" border-[1px] flex-[5] font-normal pl-[18px] text-start">{course.ten_mon_hoc}</th>
+          <th className=" border-[1px]  flex-[1] font-normal">{course.so_tc}</th>
+          <th className=" border-[1px]  flex-[1]"><Checkbox checked={listCourseChecked.includes(course.mon_hoc_id)} /></th>
+         
+        </tr>)}
+        </div>
       </table>
     </div>
   );
