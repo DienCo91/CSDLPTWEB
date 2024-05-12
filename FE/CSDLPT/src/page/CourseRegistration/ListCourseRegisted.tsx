@@ -27,6 +27,8 @@ const ListCourseRegisted: React.FC<IListCourseRegisted> = ({ listCourseRegisted 
           mon_hoc_id:item.mon_hoc_id
         }
       });
+      console.log(res);
+      
       onDelete()
       toast.success("Xóa Thành Công")
     }

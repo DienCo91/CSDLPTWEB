@@ -1,6 +1,5 @@
 import { Checkbox } from "@mui/material";
 import { ICourse, ICourseRegisted } from "./CourseRegistration";
-import CloseIcon from '@mui/icons-material/Close';
 interface IListCourseOpenRegister {
   courses:ICourse[]
   onChecked:(item:string) =>void
