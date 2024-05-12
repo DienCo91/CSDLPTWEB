@@ -83,6 +83,7 @@ const SideBar = () => {
       dispatch(setUser(null))
       dispatch(setIsLogin(false))
       navigate(ROUTES.HOME)
+      setPassword("")
       return 
 
     }

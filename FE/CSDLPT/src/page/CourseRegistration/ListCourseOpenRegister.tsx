@@ -34,7 +34,7 @@ const ListCourseOpenRegister:React.FC<IListCourseOpenRegister> = ({listCourseReg
           <th className=" border-[1px] flex-[2]">Thời khóa biểu</th> */}
         </tr>
         <div className="h-[400px] overflow-y-auto">
-        {courses&&courses.length&&courses.map((course)=><tr onClick={()=>handleClick(course)} key={course.bo_mon_id} className="flex  text-black text-center justify-between border-[#cccc]">
+        {courses&&courses.length&&courses.map((course,index)=><tr onClick={()=>handleClick(course)} key={index} className="flex  text-black text-center justify-between border-[#cccc]">
           <th className=" border-[1px] flex-[1] text-[grey] font-normal pl-[18px] text-start">{course.mon_hoc_id}</th>
           <th className=" border-[1px] flex-[5] text-[grey] font-normal pl-[18px] text-start">{course.ten_mon_hoc}</th>
           <th className=" border-[1px]  flex-[1] text-[grey] font-normal">{course.so_tc}</th>

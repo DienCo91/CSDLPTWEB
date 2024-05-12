@@ -1,14 +1,13 @@
 import { Autocomplete, Button, TextField } from "@mui/material";
-import ListCourseOpenRegister from "./ListCourseOpenRegister";
-import { LIST_COURSE_REGISTERED } from "./data_fake";
-import ListCourseRegisted from "./ListCourseRegisted";
-import { useEffect, useState } from "react";
 import axios from "axios";
-import { env } from "../../services/config";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { setLoading } from "../../features/loading/loadingSlice";
-import { RootState } from "../../app/store";
 import { toast } from "react-toastify";
+import { RootState } from "../../app/store";
+import { setLoading } from "../../features/loading/loadingSlice";
+import { env } from "../../services/config";
+import ListCourseOpenRegister from "./ListCourseOpenRegister";
+import ListCourseRegisted from "./ListCourseRegisted";
 const OPTION_COURSE = [{ label: "Môn học theo kì học lớp sinh viên" }];
 
 export interface ICourse {
@@ -86,6 +85,8 @@ const CourseRegistration = () => {
         sinh_vien_id:user?.tai_khoan_id,
         danh_sach_mon_hoc:listCourseChecked
       })
+      console.log(res);
+      
       getDataCourseRegisted()
       setListCourseChecked([])
       toast.success("Đăng kí Thành Công")

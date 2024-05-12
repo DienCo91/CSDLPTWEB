@@ -1,3 +1,4 @@
+
 const ALL_DAY = [
   "Thứ 2",
   "Thứ 3",
@@ -24,8 +25,24 @@ const TIET = [
   ["Tiết 14", "", "", "", "", "", "", "", "20:00"],
   ["Tiết 15", "", "", "", "", "", "", "", "21:00"],
 ];
+interface IScheduleTable{
+  dataTable:any[]
+}
+const ScheduleTable:React.FC<IScheduleTable> = ({dataTable}) => {
+  let dataTableTmp= dataTable
+  const addDataTable = TIET.map((item1)=>{
+    return item1.map((item2,idx)=>{
+      if(idx>0 && idx<8 && dataTableTmp.length>0){
+        const x = dataTableTmp[0]
+        dataTableTmp=dataTableTmp.slice(1)
+        return x
+      }
+      return item2
 
-const ScheduleTable = () => {
+    })
+  })
+  console.log(addDataTable);
+  
   return (
     <div className="mt-[10px] px-[4px]">
       <table className="w-full">
@@ -42,15 +59,20 @@ const ScheduleTable = () => {
             Sau <i className="fa-solid fa-right-long text-mainRed"></i>
           </th>
         </tr>
-        {TIET.map((item) => (
-          <tr>
+        {addDataTable.map((item) => (
+          <tr className="">
             {item.map((x, index) => (
               <td
                 className={`w-[80px] text-center border-[1px] border-[#8f8f8fcc] ${
                   index === 0 || index === 8 ? "bg-mainRed text-white" : ""
                 }`}
+                key={index}
               >
-                {x}
+                {index>0&&index<8 && x!==''?<div className="">
+                  <h1 className="text-start text-[14px]">Môn: {x.ten_lop}</h1>
+                  <h1 className="text-start my-[14px] text-[14px]">Phòng: {x.ten_phong}</h1>
+                  <h1 className="text-start text-[14px]">Tòa Nhà: {x.ten_toa_nha}</h1>
+                  </div>:<div>{x}</div>}
               </td>
             ))}
           </tr>
@@ -59,8 +81,8 @@ const ScheduleTable = () => {
           <th className="font-normal w-[80px] text-center border-[1px] border-[#CCCC]">
             <i className="fa-solid fa-left-long text-mainRed"></i> Trước
           </th>
-          {ALL_DAY.map((item) => (
-            <th className="font-normal border-[1px] border-[#CCCC] w-[100px] bg-mainRed text-white text-center">
+          {ALL_DAY.map((item,idx) => (
+            <th key={idx} className="font-normal border-[1px] border-[#CCCC] w-[100px] bg-mainRed text-white text-center">
               {item}
             </th>
           ))}

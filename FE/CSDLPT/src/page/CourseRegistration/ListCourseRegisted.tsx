@@ -56,7 +56,7 @@ const ListCourseRegisted: React.FC<IListCourseRegisted> = ({ listCourseRegisted 
       <div className="">
       {listCourseRegisted &&
         listCourseRegisted.map((item: ICourseRegisted) => (
-          <tr className="flex  text-black text-center justify-between border-[#cccc]">
+          <tr key={item.dang_ki_id} className="flex  text-black text-center justify-between border-[#cccc]">
             <td className=" border-[1px] flex-[1] ">
             <IconButton onClick={()=>handleDelete(item)} ><CloseIcon/> </IconButton> 
             </td>

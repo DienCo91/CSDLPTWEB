@@ -3,10 +3,29 @@ import { KI_HOC } from "../Schedule/Schedule";
 import Charts from "./Charts";
 import { useSelector } from "react-redux";
 import { RootState } from "../../app/store";
+import { useEffect } from "react";
+import axios from "axios";
+import { env } from "../../services/config";
 
 const UserInfor = () => {
   const user = useSelector((state:RootState)=>state.user.user)
-  
+
+  const getScore = ()=>{
+    try{
+      const res = axios.get(`${env.VITE_API_ENDPOINT}/diem-ki/${user?.tai_khoan_id}/HK1`)
+      console.log(res);
+      
+    }
+    catch(e){
+
+    }
+  }
+
+  useEffect(()=>{
+
+    getScore()
+
+  },[])
   return (
     <div className="shadow-md py-[6px] px-[10px] flex justify-between">
       <div className="w-[50%]">
