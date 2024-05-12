@@ -82,6 +82,9 @@ const SideBar = () => {
     if(isLogin) {
       dispatch(setUser(null))
       dispatch(setIsLogin(false))
+      navigate(ROUTES.HOME)
+      return 
+
     }
     dispatch(setLoading(true))
     try{

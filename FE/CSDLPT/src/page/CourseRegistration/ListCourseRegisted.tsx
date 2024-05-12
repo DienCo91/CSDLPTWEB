@@ -1,43 +1,77 @@
 import React from "react";
+import { ICourseRegisted } from "./CourseRegistration";
+import { IconButton } from "@mui/material";
+import CloseIcon from '@mui/icons-material/Close';
+import axios from "axios";
+import { env } from "../../services/config";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../app/store";
+import { toast } from "react-toastify";
+import { setLoading } from "../../features/loading/loadingSlice";
 interface IListCourseRegisted {
-  data: any[];
+  listCourseRegisted: ICourseRegisted[];
+  onDelete:()=>void
 }
-const ListCourseRegisted: React.FC<IListCourseRegisted> = ({ data }) => {
+const ListCourseRegisted: React.FC<IListCourseRegisted> = ({ listCourseRegisted ,onDelete}) => {
+  const user = useSelector((state:RootState)=>state.user.user)
+  const dispath = useDispatch()
+  const handleDelete = async(item:ICourseRegisted)=>{
+    try{
+        dispath(setLoading(true))
+      const res = await axios.delete(`${env.VITE_API_ENDPOINT}/dang_ki`, {
+        headers: {
+        
+        },
+        data: {
+          sinh_vien_id:user?.tai_khoan_id,
+          mon_hoc_id:item.mon_hoc_id
+        }
+      });
+      onDelete()
+      toast.success("Xóa Thành Công")
+    }
+    catch(e){
+     
+      toast.error("Xóa Không Thành Công")
+    }
+    finally{
+      dispath(setLoading(false))
+    }
+  }
+
   return (
-    <table className="w-full rounded-t-md overflow-hidden">
+    <div className="flex justify-center bg-[#7a7a7a1c] pb-[20px]  rounded-b-sm">
+
+    <table className="w-[96%] rounded-t-md overflow-hidden ">
       <tr className="flex bg-mainRed text-white text-center justify-between border-[#CCCC]">
         <th className=" border-[1px]  flex-[1]">Xóa</th>
         <th className=" border-[1px] flex-[1]">
           Mã MH <i className="fa-solid fa-caret-up ml-[4px]"></i>
         </th>
-        <th className=" border-[1px] flex-[5] ">Tên môn học </th>
-        <th className=" border-[1px]  flex-[1]">Nhóm Tổ</th>
+        <th className=" border-[1px] flex-[5] pl-[10px]">Tên môn học </th>
 
-        <th className=" border-[1px]  flex-[1]">Số TC</th>
-        <th className=" border-[1px]  flex-[1]">Lớp</th>
-        <th className=" border-[1px]  flex-[3]">Ngày đăng ký</th>
+       
         <th className=" border-[1px]  flex-[1]">Trạng thái</th>
       </tr>
-      {data &&
-        data.map((item: any) => (
+      <div className="">
+      {listCourseRegisted &&
+        listCourseRegisted.map((item: ICourseRegisted) => (
           <tr className="flex  text-black text-center justify-between border-[#cccc]">
             <td className=" border-[1px] flex-[1] ">
-              <i className="fa-solid fa-xmark"></i>
+            <IconButton onClick={()=>handleDelete(item)} ><CloseIcon/> </IconButton> 
             </td>
-            <td className=" text-[grey] border-[1px] flex-[1]">{item.id}</td>
-            <td className=" text-[grey] border-[1px] flex-[5] ">{item.name}</td>
-            <td className=" text-[grey] border-[1px] flex-[1]">{item.group}</td>
-            <td className=" text-[grey] border-[1px] flex-[1]">{item.stc}</td>
-            <td className=" text-[grey] border-[1px] flex-[1]">{item.class}</td>
-            <td className=" text-[grey] border-[1px] flex-[3]">
-              {item.date_register}
-            </td>
+            <td className=" text-[grey] border-[1px] flex-[1]">{item.mon_hoc_id}</td>
+            <td className=" text-[grey] border-[1px] flex-[5] text-start pl-[10px]">{item.ten_mon_hoc}</td>
+          
+           
             <td className=" text-[grey] border-[1px] flex-[1]">
-              {item.status}
+              Đã đăng kí 
             </td>
           </tr>
         ))}
+        </div>
     </table>
+    </div>
   );
 };
 
